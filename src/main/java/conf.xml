@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE configuration  
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-config.dtd">  
+<configuration>  
+<!-- 设置自身相关属性 -->  
+    <settings >  
+    <!-- 开启二级缓存 -->  
+        <setting name="cacheEnabled" value="false"/>  
+        <setting name="logImpl" value="STDOUT_LOGGING" />
+    <!-- 开启驼峰命名法则 -->  
+        <setting name="mapUnderscoreToCamelCase" value="false"/>  
+    </settings>  
+    <!--  <plugins>  
+      分页插件配置  
+      <plugin interceptor="com.github.pagehelper.PageHelper">  
+         <property name="reasonable" value="true"/>  
+      </plugin>  
+   </plugins>  --> 
+  
+</configuration>

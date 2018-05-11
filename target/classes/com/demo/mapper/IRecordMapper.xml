@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper   
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.demo.mapper.IRecordMapper">  
+   <select id="selectIRcord"  resultType="com.demo.entity.IRecord" parameterType="com.demo.entity.IRecord">  
+      select name,addr,amount,tradeDate,province,city from IRecord  where 1=1
+      <if test="name!=null">
+         and name=#{name}
+      </if> 
+       <if test="addr!=null">
+        and  addr=#{addr}
+      </if>
+       <if test="amount!=null">
+         and amount=#{amount}
+      </if>
+       <if test="tradeDate!=null">
+         and tradeDate=#{tradeDate}
+      </if>
+      <if test="province!=null">
+         and province=#{province}
+      </if>
+      <if test="city!=null">
+         and city=#{city}
+      </if>   
+   </select>  
+     
+   <insert id="addIRcord" parameterType="java.util.HashMap">  
+      insert into IRecord(name,addr,amount,tradeDate,province,city) values (#{name},#{addr},#{amount},#{tradeDate},#{province},#{city})  
+   </insert>
+    <select id="queryIRcordList" resultType="com.demo.entity.IRecord" parameterType="java.util.HashMap">  
+      select id,name,addr,amount,tradeDate,province,city from IRecord  where 1=1
+      <if test="name!=null">
+         and name=#{name}
+      </if> 
+       <if test="addr!=null">
+         and  addr=#{addr}
+      </if>
+       <if test="amount!=null">
+         and amount=#{amount}
+      </if>
+      <if test="startDate!=null">
+           <![CDATA[and  tradeDate>=#{startDate}]]>
+            
+      </if> 
+      <if test="endDate!=null">
+       	   <![CDATA[ and tradeDate<=#{endDate}]]>
+      </if>
+      <if test="province!=null">
+         and province=#{province}
+      </if>  
+       <if test="city!=null">
+         and city=#{city}
+      </if> 
+      <if test="page!=null">
+         limit #{rows} offset #{rows}*#{page}
+      </if>
+   </select>
+   <select id="queryToal" resultType="Integer" parameterType="java.util.HashMap">
+     select count(*) from IRecord  where 1=1
+      <if test="name!=null">
+         and name=#{name}
+      </if> 
+       <if test="addr!=null">
+         and  addr=#{addr}
+      </if>
+       <if test="amount!=null">
+         and amount=#{amount}
+      </if>
+     <if test="startDate!=null">
+           <![CDATA[and tradeDate>=#{startDate}]]>
+            
+      </if> 
+      <if test="endDate!=null">
+       	   <![CDATA[ and tradeDate<=#{endDate}]]>
+      </if>
+      <if test="province!=null">
+         and province=#{province}
+      </if>
+      <if test="city!=null">
+         and city=#{city}
+      </if>  
+   </select>
+    <select id="queryProvince" resultType="String">
+     select distinct(province) from IRecord  
+    </select>
+     <select id="queryCity" resultType="java.lang.String" parameterType="java.lang.String">
+        select distinct(city) from IRecord  where province=#{value}
+    </select>
+    <select id="queryTotalAmount" resultType="java.math.BigDecimal" parameterType="java.util.HashMap">
+     select sum(amount) from IRecord  where 1=1
+      <if test="name!=null">
+         and name=#{name}
+      </if> 
+       <if test="addr!=null">
+         and  addr=#{addr}
+      </if>
+       <if test="amount!=null">
+         and amount=#{amount}
+      </if>
+     <if test="startDate!=null">
+           <![CDATA[ and tradeDate>=#{startDate}]]>
+            
+      </if> 
+      <if test="endDate!=null">
+       	   <![CDATA[ and tradeDate<=#{endDate}]]>
+      </if>
+      <if test="province!=null">
+         and province=#{province}
+      </if>
+      <if test="city!=null">
+         and city=#{city}
+      </if>  
+   </select >
+   <delete id="deleteIRecord" parameterType="com.demo.entity.IRecord">
+      delete from IRecord where addr=#{addr};
+   </delete>
+</mapper>  
